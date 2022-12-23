@@ -1,0 +1,42 @@
+# Secure defaults
+# See: https://stribika.github.io/2015/01/04/secure-secure-shell.html
+Protocol 2
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+KexAlgorithms diffie-hellman-group-exchange-sha1
+# Faster connection
+# See: https://github.com/atmoz/sftp/issues/11
+UseDNS no
+
+# Limited access
+PermitRootLogin no
+#X11Forwarding no
+#AllowTcpForwarding no
+
+ClientAliveInterval 20
+ClientAliveCountMax 5
+
+TCPKeepAlive yes
+
+
+# Force sftp and chroot jail
+Subsystem sftp internal-sftp
+#ForceCommand internal-sftp
+#ChrootDirectory %h
+
+Match User prueba
+ChrootDirectory /home/sftp/prueba
+AllowTCPForwarding no
+X11Forwarding no
+ForceCommand internal-sftp
+
+Match User usuario
+ChrootDirectory /home/sftp/
+AllowTCPForwarding no
+X11Forwarding no
+ForceCommand internal-sftp
+
+
+
+# Enable this for more logs
+LogLevel VERBOSE

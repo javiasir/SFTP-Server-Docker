@@ -1,0 +1,18 @@
+---
+    version: '3.7'
+    services:
+      sftp:
+        container_name: sftp
+        image: $IMAGE_NAME:latest
+        build:
+          context: .
+          dockerfile: Dockerfile
+        volumes:
+          - ./datos_asitur:/home
+          - ./usuarios/users.conf:/etc/sftp/users.conf
+          - ./usuarios/scripts/permisos.sh:/root/permisos.sh
+          - ./usuarios/scripts/auth.sh:/root/auth.sh
+          - ./usuarios/bindmount.sh:/etc/sftp.d/bindmount.sh
+          - ./config/sshd_config:/etc/ssh/sshd_config
+        ports:
+          - $EXTERNALPORT:$INTERNALPORT
