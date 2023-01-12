@@ -8,7 +8,7 @@
           context: .
           dockerfile: Dockerfile
         volumes:
-          - ./datos_asitur:/home
+          - ./datos:/home
           - ./usuarios/users.conf:/etc/sftp/users.conf
           - ./usuarios/scripts/permisos.sh:/root/permisos.sh
           - ./usuarios/scripts/auth.sh:/root/auth.sh
